@@ -1,0 +1,156 @@
+body {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  text-align: center;
+  user-select: none;
+  overflow: hidden;
+}
+
+header {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  font-weight: bolder;
+  font-style: italic;
+  text-shadow: 2px 2px #ff0000;
+}
+
+aside {
+  font-size: 26px;
+  top: 0;
+  position: absolute;
+  padding: 0.25rem;
+  width: 100vw;
+  height: 1.5rem;
+}
+
+aside:before {
+  content: counter(gifts-wrapped);
+  font-weight: 900;
+}
+
+.win,
+.lost {
+  height: 100vh;
+  color: white;
+  background: linear-gradient(#eb226d, #ad9d9c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  flex-direction: column;
+  font-size: 4rem;
+  position: absolute;
+  top: 100vh;
+  left: 0;
+}
+
+.lost {
+  background: linear-gradient(#37ab5a, #e5ce12);
+}
+
+input {
+  counter-increment: gifts;
+  position: absolute;
+  left: -100vw;
+}
+
+input:checked {
+  counter-increment: gifts gifts-wrapped;
+}
+
+label {
+  animation: move 4s infinite linear alternate;
+  display: inline-block;
+  font-size: 4rem;
+}
+
+label[for="1"]:before {
+  content: "💍";
+}
+
+label[for="2"]:before {
+  content: "🎧";
+}
+
+label[for="3"]:before {
+  content: "👠";
+}
+
+label[for="4"]:before {
+  content: "🎸";
+}
+
+label[for="5"]:before {
+  content: "📱";
+}
+
+label[for="6"]:before {
+  content: "🦠";
+}
+
+input:checked + label:before {
+  content: "🎁";
+}
+
+input:checked + label {
+  animation-play-state: paused;
+  pointer-events: none;
+}
+
+label:nth-of-type(even) {
+  animation-direction: alternate-reverse;
+  animation-duration: 3.5;
+  transform: translateY(calc(100vh - 3rem));
+}
+
+input:checked
+  ~ input:checked
+  ~ input:checked
+  ~ input:checked
+  ~ input:checked
+  ~ .win {
+  top: 0;
+  transform: 500ms;
+}
+
+input[id="6"]:checked ~ .lost {
+  top: 0;
+  transition: 500ms;
+}
+
+label:nth-of-type(n + 3) {
+  animation-delay: 1s;
+}
+
+label:nth-of-type(-n + 3) {
+  animation-duration: 5s;
+}
+
+@keyframes move {
+  0% {
+    transform: translateY(0);
+  }
+
+  20% {
+    transform: translateY(calc(30vh)) translateX(50px);
+  }
+
+  40% {
+    transform: translateY(calc(80vh - 3rem)) translateX(-150px);
+  }
+
+  60% {
+    transform: translateY(calc(50vh - 3rem)) translateX(-100px);
+  }
+
+  80% {
+    transform: translateY(calc(85vh - 3rem)) translateX(100px);
+  }
+
+  100% {
+    transform: translateY(calc(100vh - 3rem));
+  }
+}
